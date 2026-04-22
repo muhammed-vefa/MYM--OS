@@ -50,7 +50,19 @@ jobs:
       - name: Build iOS (Emulator)
         run: |
           rm -rf ~/Library/Developer/Xcode/DerivedData
-          cordova build ios --emulator --debug --buildConfig=build.json --verbose -- --PROVISIONING_PROFILE_SPECIFIER="" --DEVELOPMENT_TEAM=""
+          # Build and redirect output to a file, don't fail immediately
+          cordova build ios --emulator --debug --buildConfig=build.json --verbose -- --PROVISIONING_PROFILE_SPECIFIER="" --DEVELOPMENT_TEAM="" > build_log.txt 2>&1 || export BUILD_FAILED=1
+          
+          if [ "$BUILD_FAILED" = "1" ]; then
+            echo "========================================================="
+            echo "🚨 BİLDİRİM: DERLEME HATASI DETAYLARI AŞAĞIDADIR 🚨"
+            echo "========================================================="
+            # Sadece 'error:' geçen satırları ve 1 satır üstü/altını göster
+            grep -i -C 1 "error:" build_log.txt || echo "Tam 'error:' kelimesi bulunamadı."
+            echo "========================================================="
+            echo "Lütfen yukarıdaki kırmızı/hata satırlarının ekran görüntüsünü paylaşın."
+            exit 1
+          fi
         
       - name: Archive build
         run: |
