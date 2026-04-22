@@ -1,0 +1,35 @@
+{
+  "name": "com.keydata.kocaelimym",
+  "version": "1.6.5",
+  "displayName": "MYM",
+  "cordova": {
+    "platforms": [
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-camera": {},
+      "phonegap-plugin-barcodescanner": {},
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-app-version": {}
+    }
+  },
+  "dependencies": {
+    "cordova-ios": "^6.3.0",
+    "cordova-plugin-device": "2.1.0",
+    "cordova-plugin-camera": "6.0.1",
+    "phonegap-plugin-barcodescanner": "8.1.0",
+    "cordova-sqlite-storage": "6.1.0",
+    "cordova-plugin-x-socialsharing": "6.0.4",
+    "cordova-plugin-splashscreen": "6.0.2",
+    "cordova-plugin-statusbar": "3.0.0",
+    "cordova-plugin-ionic-keyboard": "2.2.0",
+    "cordova-plugin-ionic-webview": "5.0.0",
+    "cordova-plugin-app-version": "0.1.14"
+  }
+}
