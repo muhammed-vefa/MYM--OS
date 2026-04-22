@@ -11,22 +11,20 @@ jobs:
         with:
           node-version: 18
           
-      - name: Debug Info
-        run: |
-          pwd
-          ls -R
-          node -v
-          npm -v
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.0.1.app
           
       - name: Install Cordova
         run: npm install -g cordova
         
-      - name: Check Cordova Version
-        run: cordova --version
-        
       - name: Add iOS Platform
+        run: cordova platform add ios
+        
+      - name: Force Deployment Target
         run: |
-          cordova platform add ios
+          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 11.0/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
+          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 10.0/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
+          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 9.0/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
           
       - name: Build iOS
         run: cordova build ios --no-sign
