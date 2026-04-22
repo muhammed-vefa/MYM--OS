@@ -11,9 +11,6 @@ jobs:
         with:
           node-version: 18
           
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.0.1.app
-          
       - name: Install Cordova
         run: npm install -g cordova
         
@@ -22,9 +19,7 @@ jobs:
         
       - name: Force Deployment Target
         run: |
-          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 11.0/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
-          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 10.0/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
-          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 9.0/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
+          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
           
       - name: Build iOS
         run: cordova build ios --no-sign
