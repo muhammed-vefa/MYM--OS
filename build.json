@@ -1,0 +1,24 @@
+{
+  "ios": {
+    "debug": {
+      "codeSignIdentity": "iPhone Developer",
+      "packageType": "development",
+      "buildFlag": [
+        "CODE_SIGNING_ALLOWED=NO",
+        "CODE_SIGNING_REQUIRED=NO",
+        "CODE_SIGN_ENTITLEMENTS=",
+        "CODE_SIGNING_IDENTITY="
+      ]
+    },
+    "release": {
+      "codeSignIdentity": "iPhone Distribution",
+      "packageType": "app-store",
+      "buildFlag": [
+        "CODE_SIGNING_ALLOWED=NO",
+        "CODE_SIGNING_REQUIRED=NO",
+        "CODE_SIGN_ENTITLEMENTS=",
+        "CODE_SIGNING_IDENTITY="
+      ]
+    }
+  }
+}

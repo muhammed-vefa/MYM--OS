@@ -28,8 +28,13 @@ jobs:
           cd platforms/ios
           pod install --repo-update
           
+      - name: Debug Project Structure
+        run: |
+          ls -R platforms/ios | grep .xcodeproj || echo "No xcodeproj found"
+          grep "IPHONEOS_DEPLOYMENT_TARGET" platforms/ios/*.xcodeproj/project.pbxproj | head -n 5 || echo "Target not found in pbxproj"
+          
       - name: Build iOS
-        run: cordova build ios --no-sign --verbose
+        run: cordova build ios --debug --buildConfig=build.json --verbose
         
       - name: Archive build
         run: |
