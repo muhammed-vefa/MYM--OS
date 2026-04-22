@@ -2,7 +2,7 @@ name: Build iOS IPA
 on: [push]
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
       
@@ -17,9 +17,11 @@ jobs:
       - name: Add iOS Platform
         run: cordova platform add ios
         
-      - name: Force Deployment Target
+      - name: Force Fixes (Deployment Target & Bitcode)
         run: |
           find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
+          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/ENABLE_BITCODE = YES/ENABLE_BITCODE = NO/g' {} +
+          find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO/ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES/g' {} +
           
       - name: Install CocoaPods
         run: |
