@@ -22,19 +22,20 @@ jobs:
           find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
           find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/ENABLE_BITCODE = YES/ENABLE_BITCODE = NO/g' {} +
           find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO/ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES/g' {} +
+          # Force deployment target in Pods as well
+          if [ -d "platforms/ios/Pods" ]; then
+            find platforms/ios/Pods -name "*.xcconfig" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
+          fi
           
       - name: Install CocoaPods
         run: |
           cd platforms/ios
           pod install --repo-update
           
-      - name: Debug Project Structure
+      - name: Build iOS (Emulator)
         run: |
-          ls -R platforms/ios | grep .xcodeproj || echo "No xcodeproj found"
-          grep "IPHONEOS_DEPLOYMENT_TARGET" platforms/ios/*.xcodeproj/project.pbxproj | head -n 5 || echo "Target not found in pbxproj"
-          
-      - name: Build iOS
-        run: cordova build ios --debug --buildConfig=build.json --verbose
+          rm -rf ~/Library/Developer/Xcode/DerivedData
+          cordova build ios --emulator --debug --buildConfig=build.json --verbose -- --PROVISIONING_PROFILE_SPECIFIER="" --DEVELOPMENT_TEAM=""
         
       - name: Archive build
         run: |
