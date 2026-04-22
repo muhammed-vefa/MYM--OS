@@ -1,0 +1,7 @@
+{
+  "platform": "ios",
+  "release": "debug",
+  "iosDevP12": "certificates/ios_development.p12",
+  "iosDevP12Password": "123456",
+  "iosDevProvisioning": "certificates/ios_development.mobileprovision"
+}

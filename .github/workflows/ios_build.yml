@@ -1,0 +1,34 @@
+name: Build iOS IPA
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          
+      - name: Install Cordova
+        run: npm install -g cordova
+        
+      - name: Add iOS Platform
+        run: cordova platform add ios
+        
+      - name: Build iOS
+        run: cordova build ios --no-sign
+        
+      - name: Archive build
+        run: |
+          mkdir -p build-output
+          cp -R platforms/ios/build/emulator/MYM.app build-output/
+          cd build-output
+          zip -r MYM_Unsigned.ipa MYM.app
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MYM_iOS_Unsigned
+          path: build-output/MYM_Unsigned.ipa

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.keydata.kocaelimym" version="1.6.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>MYM</name>
+    <description>MYM - Talep Yönetim Sistemi</description>
+    <author email="info@keydata.com.tr" href="https://keydata.com.tr">Keydata Team</author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <preference name="WKWebViewOnly" value="true" />
+    </platform>
+
+    <preference name="ScrollEnabled" value="false" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+
+    <plugin name="cordova-plugin-device" spec="2.1.0" />
+    <plugin name="cordova-plugin-camera" spec="6.0.1" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="8.1.0" />
+    <plugin name="cordova-sqlite-storage" spec="6.1.0" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="6.0.4" />
+    <plugin name="cordova-plugin-splashscreen" spec="6.0.2" />
+    <plugin name="cordova-plugin-statusbar" spec="3.0.0" />
+    <plugin name="cordova-plugin-ionic-keyboard" spec="2.2.0" />
+    <plugin name="cordova-plugin-ionic-webview" spec="5.0.0" />
+    <plugin name="cordova-plugin-app-version" spec="0.1.14" />
+</widget>
