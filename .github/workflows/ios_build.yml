@@ -21,8 +21,13 @@ jobs:
         run: |
           find platforms/ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' {} +
           
+      - name: Install CocoaPods
+        run: |
+          cd platforms/ios
+          pod install --repo-update
+          
       - name: Build iOS
-        run: cordova build ios --no-sign
+        run: cordova build ios --no-sign --verbose
         
       - name: Archive build
         run: |
