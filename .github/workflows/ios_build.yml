@@ -13,11 +13,7 @@ jobs:
           node-version: 20
           
       - name: Install Cordova
-        run: |
-          npm install -g cordova cordova-res
-          
-      - name: Generate Resources
-        run: cordova-res ios || true
+        run: npm install -g cordova
         
       - name: Add iOS Platform
         run: cordova platform add ios
